@@ -1,5 +1,8 @@
 .env
 .env*local
 
+/config
+/storage
+
 go.work
 go.work.sum
