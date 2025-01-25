@@ -5,11 +5,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
+	"github.com/ilyakaznacheev/cleanenv"
 )
 
 type HTTPServer struct {
-	Addr string
+	Addr string `yaml:"address" env-required:"true"`
 }
 
 type Config struct {
@@ -40,7 +40,7 @@ func LoadConf() *Config {
 
 	var cfg Config
 
-	err := godotenv.Load(configPath)
+	err := cleanenv.ReadConfig(configPath, &cfg)
 	if err != nil {
 		log.Fatalf("can not read config file:%s", err.Error())
 	}
