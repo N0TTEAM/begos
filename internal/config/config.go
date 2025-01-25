@@ -18,7 +18,7 @@ type Config struct {
 	HTTPServer  `yaml:"http_server"`
 }
 
-func LoadConf() {
+func LoadConf() *Config {
 	var configPath string
 
 	configPath = os.Getenv("CONFIG_PATH")
@@ -40,9 +40,9 @@ func LoadConf() {
 
 	var cfg Config
 
-	err := godotenv.Read(configPath)
+	err := godotenv.Load(configPath)
 	if err != nil {
-		log.Fatalf("can not read config file:%s", &err.Error())
+		log.Fatalf("can not read config file:%s", err.Error())
 	}
 
 	return &cfg
