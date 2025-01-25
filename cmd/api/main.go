@@ -11,12 +11,26 @@ import (
 	"time"
 
 	"github.com/N0TTEAM/begos/internal/config"
+	"github.com/N0TTEAM/begos/internal/db"
 )
 
 func main() {
 	cfg := config.LoadConf()
 
 	router := http.NewServeMux()
+	database := db.NewConnection(&cfg.Postgres)
+
+	sqlDB, err := database.DB()
+
+	if err != nil {
+		slog.Error("Failed to get database instance", slog.String("error", err.Error()))
+		os.Exit(1)
+	}
+	defer func() {
+		if err := sqlDB.Close(); err != nil {
+			slog.Error("Failed to close database connection", slog.String("error", err.Error()))
+		}
+	}()
 
 	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcomee"))

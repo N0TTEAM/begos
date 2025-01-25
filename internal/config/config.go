@@ -12,10 +12,20 @@ type HTTPServer struct {
 	Addr string `yaml:"address" env-required:"true"`
 }
 
+type Postgres struct {
+	Host     string `yaml:"host" env-required:"true"`
+	Port     int    `yaml:"port" env-required:"true"`
+	User     string `yaml:"user" env-required:"true"`
+	Password string `yaml:"password" env-required:"true"`
+	Dbname   string `yaml:"dbname" env-required:"true"`
+	SslMode  string `yaml:"sslmode" env-required:"true"`
+}
+
 type Config struct {
 	Env         string `yaml:"env" env:"ENV" env-required:"true"`
 	StoragePath string `yaml:"storage_path" env-required:"true"`
 	HTTPServer  `yaml:"http_server"`
+	Postgres    `yaml:"postgresql"`
 }
 
 func LoadConf() *Config {
