@@ -34,7 +34,7 @@ func LoadConf() *Config {
 	configPath = os.Getenv("CONFIG_PATH")
 
 	if configPath == "" {
-		flags := flag.String("config", "", "path to the configuration")
+		flags := flag.String("config", "config/local.yaml", "path to the configuration")
 		flag.Parse()
 
 		configPath = *flags
