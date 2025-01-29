@@ -22,7 +22,7 @@ func main() {
 	modelName := os.Args[1]
 
 	if len(modelName) == 0 || !isUppercase(modelName[0]) {
-		log.Fatalf("Invalid model name: %s. Model name must start with capital")
+		log.Fatalf("Invalid model name: %s. Model name must start with capital", modelName)
 	}
 
 	filepath := "internal/http/model/" + strings.ToLower(modelName) + ".go"
