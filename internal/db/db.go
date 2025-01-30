@@ -19,6 +19,6 @@ func NewConnection(cfg *config.Postgres) *gorm.DB {
 		log.Fatalf("Failed to connect db: %v", err)
 	}
 
-	log.Println("connected")
+	log.Println("Database Connected")
 	return db
 }
