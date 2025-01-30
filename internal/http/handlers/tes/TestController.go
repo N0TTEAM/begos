@@ -14,7 +14,7 @@ import (
 
 func New() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var testing model.User
+		var testing model.Tes
 		err := json.NewDecoder(r.Body).Decode(&testing)
 		if errors.Is(err, io.EOF) {
 			response.WriteJson(w, http.StatusBadRequest, response.GeneralError(fmt.Errorf("empty body")))
