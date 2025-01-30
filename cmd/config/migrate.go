@@ -15,8 +15,9 @@ func main() {
 	flag.Parse()
 
 	cfg := config.LoadConf()
-	database := db.NewConnection(&cfg.Postgres)
+	db.NewConnection(&cfg.Postgres)
 
+	database := db.GetDB()
 	sqlDB, err := database.DB()
 	if err != nil {
 		log.Fatalf("Failed to get database instance: %v", err)

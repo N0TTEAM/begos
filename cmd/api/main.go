@@ -12,14 +12,16 @@ import (
 
 	"github.com/N0TTEAM/begos/internal/config"
 	"github.com/N0TTEAM/begos/internal/db"
+	"github.com/N0TTEAM/begos/internal/routes"
+	"github.com/gorilla/mux"
 )
 
 func main() {
 	cfg := config.LoadConf()
 
-	router := http.NewServeMux()
-	database := db.NewConnection(&cfg.Postgres)
+	db.NewConnection(&cfg.Postgres)
 
+	database := db.GetDB()
 	sqlDB, err := database.DB()
 
 	if err != nil {
@@ -32,9 +34,12 @@ func main() {
 		}
 	}()
 
-	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcomee"))
-	})
+	// router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+	// 	w.Write([]byte("welcomee"))
+	// })
+
+	router := mux.NewRouter()
+	routes.RegisterRoute(router)
 
 	server := http.Server{
 		Addr:    cfg.Addr,
