@@ -1,7 +1,7 @@
 .env
 .env*local
 
-/config
+/config/local.yaml
 /storage
 
 go.work

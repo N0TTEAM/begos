@@ -1,0 +1,11 @@
+env: ""
+storage_path: "storage/storage.go"
+http_server:
+  address: ""
+postgresql: 
+  host: ""
+  port: 
+  user: ""
+  password: ""
+  dbname: ""
+  sslmode: ""
